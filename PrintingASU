@@ -76,57 +76,9 @@ draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, 
   % add spaces here between A and S
   ColumnNumber is 0,
   % drawS
-/*-------------------------------------------------------------------------------------------------------------*/
-
-drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
-  (ColumnNumber >= 0, ColumnNumber < FontSize*3),
-  (CurrentLine >= 0, CurrentLine < FontSize*5),
-  drawSymbol(‘*’, FontSize),
-  NextColumn is ColumnNumber + FontSize,
-  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
-
-% Filling the first column with blank spaces
-drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
-  (ColumnNumber >= 0, ColumnNumber < FontSize),
-  (CurrentLine >= FontSize*3, CurrentLine < FontSize*4),
-  drawSymbol(‘*’, FontSize),
-  NextColumn is ColumnNumber + FontSize,
-  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
-
-% Filling the second column with blank spaces
-drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
-  (ColumnNumber >= FontSize, ColumnNumber < FontSize*2),
-  (
-    (CurrentLine >= FontSize, CurrentLine < FontSize*2);
-    (CurrentLine >= FontSize*3, CurrentLine < FontSize*4)
-  ),
-  drawSymbol(‘*’, FontSize),
-  NextColumn is ColumnNumber + FontSize,
-  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
-
-% Filling the third column with blank spaces
-drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
-  (ColumnNumber >= FontSize*2, ColumnNumber < FontSize*3),
-  (CurrentLine >= FontSize, CurrentLine < FontSize*2),
-  drawSymbol(‘*’, FontSize),
-  NextColumn is ColumnNumber + FontSize,
-  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
-%
-                                                                                                                       
-draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
-  CurrentLine >= TextHeight.
-draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
-  CurrentLine < TextHeight,
-  write('|'), drawSymbol(' ', LeftRightMargin),
-  ColumnNumber is 0,
-  drawA(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber).
-
   % add spaces here between S and U
   ColumnNumber is 0,
-/*-------------------------------------------------------------------------------------------------------------*/
-  
-% drawU
-
+  % drawU
   /*---------------------------------------------*/
   drawSymbol(' ', LeftRightMargin),
   write('|'),
@@ -155,3 +107,119 @@ asu(LeftRightMargin, BottomTopMargin, SpaceBetweenCharacters, FontSize) :-
   drawVerticalLinesWithCharacters(LeftRightMargin, BottomTopMargin, SpaceBetweenCharacters, FontSize),
   drawVerticalLinesWithSpace('|', BottomTopMargin, Width),
   drawHorizontalLine('-', Width).
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+%Draw S
+%
+% Filling the 3x5 with *
+drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= 0, ColumnNumber < FontSize*3),
+  (CurrentLine >= 0, CurrentLine < FontSize*5)
+
+  drawSymbol(‘*’, FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+
+% Filling the first column with blank spaces
+drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= 0, ColumnNumber < FontSize),
+  (CurrentLine >= FontSize*3, CurrentLine < FontSize*4)
+
+  drawSymbol(‘*’, FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+
+% Filling the second column with blank spaces
+drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= FontSize, ColumnNumber < FontSize*2),
+  
+  (
+    (CurrentLine >= FontSize, CurrentLine < FontSize*2);
+    (CurrentLine >= FontSize*3, CurrentLine < FontSize*4)
+  ),
+
+  drawSymbol(‘*’, FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+
+% Filling the third column with blank spaces
+drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= FontSize*2, ColumnNumber < FontSize*3),
+  (CurrentLine >= FontSize, CurrentLine < FontSize*2)
+
+  drawSymbol(‘*’, FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawS(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+%
+                                                                                                                       
+
+draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
+  CurrentLine >= TextHeight.
+draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
+  CurrentLine < TextHeight,
+  write('|'), drawSymbol(' ', LeftRightMargin),
+  ColumnNumber is 0,
+  drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber).
+%END OF DRAW S
+
+  % add spaces here between S and U
+
+%Draw…..U…..
+%
+% Filling the 3x5 with *
+drawU(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= 0, ColumnNumber < FontSize*3),
+  (CurrentLine >= 0, CurrentLine < FontSize*5),
+
+  drawSymbol(' ', FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawU(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+
+
+% Filling the second column with blank spaces
+drawS(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber) :-
+  (ColumnNumber >= FontSize, ColumnNumber < FontSize*2),
+  (CurrentLine >= 0, CurrentLine < FontSize*4),
+
+  drawSymbol(' ', FontSize),
+  NextColumn is ColumnNumber + FontSize,
+  drawU(TextWidth, TextHeight, FontSize, CurrentLine, NextColumn).
+
+%
+
+draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
+  CurrentLine >= TextHeight.
+draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight) :-
+  CurrentLine < TextHeight,
+  write('|'), drawSymbol(' ', LeftRightMargin),
+  ColumnNumber is 0,
+  drawU(TextWidth, TextHeight, FontSize, CurrentLine, ColumnNumber),
+%END OF DRAW U
+
+
+  /*---------------------------------------------*/
+  drawSymbol(' ', LeftRightMargin),
+  write('|'),
+  nl,
+  NextLine is CurrentLine + 1,
+  draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, NextLine, TextWidth, TextHeight).
+
+
+
+drawVerticalLinesWithCharacters(LeftRightMargin, BottomTopMargin, SpaceBetweenCharacters, FontSize) :-
+  CurrentLine is 0,
+  TextWidth is FontSize * 3,
+  TextHeight is FontSize * 5,
+  draw(LeftRightMargin, SpaceBetweenCharacters, FontSize, CurrentLine, TextWidth, TextHeight).
+
